@@ -1,7 +1,6 @@
 #+TITLE: Primer parcial INF 324
 
-* Primer parcial INF 324
-** Enunciado
+* Enunciado
 1. Usted ha definido una tabla IDENTIFICADOR en la base de datos ACADEMICO, la
    cual contiene información de CI, Nombre completo, fecha de nacimiento, lugar
    de residencia (codigo) (El dato suyo es inicial, aunque el numero de carnet
@@ -15,5 +14,5 @@
    cuente la cantidad de aprobados por departamento de manera que solo obtenga
    una sola fila de resultados (con codigo PHP, con codigo SQL) Una vez
    desarrollado, en un archivo Word o PDF indique el link por cada pregunta.
-
-** Instrucciones
+  
+* Instrucciones
