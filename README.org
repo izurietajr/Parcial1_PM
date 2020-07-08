@@ -1,5 +1,8 @@
 #+TITLE: Primer parcial INF 324
 
+| Nombre: | Jesus Rodolfo Izurieta Veliz |
+| CI:     |                      9860616 |
+
 * Enunciado
 1. Usted ha definido una tabla IDENTIFICADOR en la base de datos ACADEMICO, la
    cual contiene información de CI, Nombre completo, fecha de nacimiento, lugar
