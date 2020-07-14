@@ -35,7 +35,46 @@ proyecto estará corriendo en el puerto 8000.
 En caso de no instalar docker, el proyecto puede inicializarse usando XAMPP,
 para lo cual, el directorio =parcial1= tendrá que copiarse a =htdocs=.
 
-* Base de datos
+* INF 324 - Informe de desarrollo primer parcial
+#+export_file_name: Informe de desarrollo.pdf
+#+include: ~/org/templates/tarea.org
+#+latex_header: \newcommand{\hleft}{Programación Multimedial}
+#+latex_header: \newcommand{\hright}{INF 324}
+#+latex_header: \setlength{\parindent}{0cm}
+Para este proyecto usaremos la biblioteca codeigniter para desarrollar en php,
+para la base de datos usaremos mariadb, un motor de base de datos open source
+basado en mysql. El proyecto estará organizado en contenedores docker, para
+facilitar su distribución y replicar su funcionamiento sin tener que lidiar con
+problemas de versiones ni configuraciones extra para el funcionamiento del
+proyecto.
+
+** Configuración del proyecto
+La estructura del proyecto estará definida por el archivo =docker-compose.yml=,
+en el que indicaremos las imágenes de docker que se usarán para el proyecto, en
+este caso, usaremos contenedores de codeigniter y mariadb.
+
+#+begin_src yml
+version: '2'
+services:
+  myapp:
+    image: 'docker.io/bitnami/codeigniter:3-debian-10'
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    ports:
+      - '3306:3306'
+    volumes:
+      - './mysql:/bitnami/mariadb'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+#+end_src
+
+** Base de datos
 Después de inicializar el proyecto con docker, necesitaremos crear la base de
 datos, nos conectamos al contenedor de mariadb con el comando:
 
@@ -68,10 +107,10 @@ contraseña recientemente creados.
 Ahora crearemos la base de datos y la seleccionaremos para crear las tablas en
 ella.
 
-=CREATE DATABASE ACADEMICO;=
-=USE ACADEMICO;=
+=CREATE DATABASE academico;=
+=USE academico;=
 
-Ahora crearemos las siguientes tablas:
+ahora crearemos las siguientes tablas:
 
 *Tabla USUARIO*
 
@@ -146,6 +185,9 @@ CREATE TABLE notas
     foreign key (user_pk) REFERENCES usuario(pk)
 );
 #+end_src
+
+Podremos comprobar que las tablas se crearon con el comando =show tables;=, que
+nos mostrará una lista de las tablas de nuestra base de datos.
 
 
 * Estructura del proyecto
