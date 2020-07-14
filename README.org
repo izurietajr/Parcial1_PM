@@ -19,3 +19,27 @@
    desarrollado, en un archivo Word o PDF indique el link por cada pregunta.
   
 * Instrucciones
+** Docker
+Para iniciar el proyecto con docker, se necesita tener instalado docker:
+
+[[https://docs.docker.com/engine/install/][Instalación de docker]]
+
+Y docker-compose:
+
+[[https://docs.docker.com/compose/install/][Instalación de docker-compose]]
+
+Después de esto, el servidor se inicia con el comando =docker-compose up= y el
+proyecto estará corriendo en el puerto 8000.
+
+** XAMPP
+En caso de no instalar docker, el proyecto puede inicializarse usando XAMPP,
+para lo cual, el directorio =parcial1= tendrá que copiarse a =htdocs=.
+
+* Estructura del proyecto
+El proyecto consta de dos secciones para resolver los dos problemas propuestos
+en el enunciado.
+- Inicio de sesión :: Para el inicio de sesión se ingresa en la dirección raíz
+  (/) y si no se tiene una sesión iniciada, se mostrará el formulario de inicio
+  de sesión. En caso de tener una sesión, el usuario podrá acceder
+  automáticamente a su página de perfil, donde se mostrará su foto y la opción
+  de cambiar el color de la página.
