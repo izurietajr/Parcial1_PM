@@ -75,10 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mariadb'
-	'database_user' => 'bn_app'
-	'database_password' => 'b8j9sk4Bg2'
-	'databasename' => 'bitnami_app'
+	'hostname' => 'mariadb',
+	'database_user' => 'admin',
+	'database_password' => '12345678x',
+	// 'database_password' => 'b8j9sk4Bg2',
+	'databasename' => 'academico',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
