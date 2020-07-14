@@ -13,8 +13,12 @@ class Login extends CI_Controller {
 		$this->load->view('login');
 	}
 
-	public function nippa()
+	public function validate()
 	{
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		echo $username;
+		echo $password;
 		$this->load->view('headers');
 		$this->load->view('welcome_message');
 	}

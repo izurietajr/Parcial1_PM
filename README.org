@@ -83,7 +83,7 @@ datos, nos conectamos al contenedor de mariadb con el comando:
 Donde =65bdcb8d72f1= es el código del contenedor, que puede obtenerse con el
 comando =docker ps= cuando el proyecto está ejecutándose.
 
-** Creación de tablas
+*** Creación de tablas
 En la línea de comandos, iniciamos una sesión en mysql con el comando:
 
 =mysql -u root -p=
@@ -189,8 +189,7 @@ CREATE TABLE notas
 Podremos comprobar que las tablas se crearon con el comando =show tables;=, que
 nos mostrará una lista de las tablas de nuestra base de datos.
 
-
-* Estructura del proyecto
+** Estructura del proyecto
 El proyecto consta de dos secciones para resolver los dos problemas propuestos
 en el enunciado.
 - Inicio de sesión :: Para el inicio de sesión se ingresa en la dirección raíz
