@@ -14,6 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Model {
 
+    function __construct(){
+        parent::__construct();
+        $this->load->database();
+    }
+
     function validate_password(){
         $query = $this->db->get('usuario', 1);
         return $query->result();

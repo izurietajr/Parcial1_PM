@@ -9,16 +9,21 @@ class Login extends CI_Controller {
 		$data["userid"] = "5";
 
 		$this->load->view('headers');
-		$this->load->view('navbar', $data);
+		// $this->load->view('navbar', $data);
 		$this->load->view('login');
 	}
 
 	public function validate()
 	{
-		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+
 		echo $username;
 		echo $password;
+
+		$this->load->model('user', 'user', TRUE);
+		$this->user->validate_password();
+
 		$this->load->view('headers');
 		$this->load->view('welcome_message');
 	}
