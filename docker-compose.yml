@@ -16,4 +16,3 @@ services:
       - './mysql:/bitnami/mariadb'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_PASSWORD=12345678x
