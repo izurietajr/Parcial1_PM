@@ -1,4 +1,4 @@
-
+<body>
 <div id="container">
 	<h1>Inicio de sesión</h1>
 

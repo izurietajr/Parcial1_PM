@@ -8,7 +8,6 @@ class Login extends CI_Controller {
 		$params['error'] = TRUE && $err;
 		$this->load->view('headers');
 		$this->load->view('login', $params);
-		// $this->load->view('navbar', $data);
 	}
 
 	public function validate()
@@ -29,9 +28,15 @@ class Login extends CI_Controller {
 
 	}
 
-	private function profile($response){
-		// TODO show profile
-		$data['users'] = $response;
+	private function profile($params)
+	{
+		$this->load->model('identifier', 'identifier', TRUE);
+		$user_pk = $params->result()[0]->pk;
+
+		$response = $this->identifier->get_user_data($user_pk);
+
+		$data['photo'] = $params->result()[0]->photo;
+
 		$this->load->view('headers');
 		$this->load->view('profile', $data);
 
