@@ -28,7 +28,7 @@ class Login extends CI_Controller {
 
 	}
 
-	private function profile($params)
+	public function profile($params)
 	{
 		$this->load->model('identifier', 'identifier', TRUE);
 		$user_pk = $params->result()[0]->pk;
