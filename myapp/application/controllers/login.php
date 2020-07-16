@@ -22,9 +22,9 @@ class Login extends CI_Controller {
 		echo $password;
 
 		$this->load->model('user', 'user', TRUE);
-		$this->user->validate_password();
+		$data['users'] = $this->user->validate_password();
 
 		$this->load->view('headers');
-		$this->load->view('welcome_message');
+		$this->load->view('profile', $data);
 	}
 }

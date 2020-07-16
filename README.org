@@ -189,11 +189,25 @@ CREATE TABLE notas
 Podremos comprobar que las tablas se crearon con el comando =show tables;=, que
 nos mostrará una lista de las tablas de nuestra base de datos.
 
-** Estructura del proyecto
+** Desarrollo
 El proyecto consta de dos secciones para resolver los dos problemas propuestos
-en el enunciado.
-- Inicio de sesión :: Para el inicio de sesión se ingresa en la dirección raíz
-  (/) y si no se tiene una sesión iniciada, se mostrará el formulario de inicio
-  de sesión. En caso de tener una sesión, el usuario podrá acceder
-  automáticamente a su página de perfil, donde se mostrará su foto y la opción
-  de cambiar el color de la página.
+en el enunciado, la página de perfil de usuario, que mostrará la foto del
+usuario y la parte de notas, donde se mostrará el contenido de la tabla notas.
+
+** Modelos
+Codeigniter nos permite abstraer los datos de una base de datos y las acciones
+que podemos realizar sobre ellas mediante modelos que definimos por cada tabla
+de la base de datos.
+
+**** Usuario
+Definimos el modelo usuario
+
+** Vistas
+*** Inicio de sesión
+Para el inicio de sesión se ingresa en la dirección raíz (/) y si no se tiene
+una sesión iniciada, se mostrará el formulario de inicio de sesión. En caso de
+tener una sesión, el usuario podrá acceder automáticamente a su página de
+perfil, donde se mostrará su foto y la opción de cambiar el color de la página.
+
+Para esto, empezaremos por definir los modelos que representarán a las tablas de
+la base de datos.

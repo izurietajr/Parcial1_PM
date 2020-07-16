@@ -20,8 +20,8 @@ class User extends CI_Model {
     }
 
     function validate_password(){
-        $query = $this->db->get('usuario', 1);
-        return $query->result();
+        $query = $this->db->get('usuario');
+        return $query;
     }
 
 

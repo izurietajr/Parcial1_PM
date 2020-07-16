@@ -1,4 +1,4 @@
-% Created 2020-07-14 Tue 13:33
+% Created 2020-07-15 Wed 20:58
 % Intended LaTeX compiler: pdflatex
 \documentclass[letter]{article}
 \usepackage[utf8]{inputenc}
@@ -53,7 +53,7 @@ problemas de versiones ni configuraciones extra para el funcionamiento del
 proyecto.
 
 \section{Configuración del proyecto}
-\label{sec:org9561cc9}
+\label{sec:org4976d06}
 La estructura del proyecto estará definida por el archivo \texttt{docker-compose.yml},
 en el que indicaremos las imágenes de docker que se usarán para el proyecto, en
 este caso, usaremos contenedores de codeigniter y mariadb.
@@ -80,7 +80,7 @@ services:
 \end{verbatim}
 
 \section{Base de datos}
-\label{sec:org007a13f}
+\label{sec:org5d76943}
 Después de inicializar el proyecto con docker, necesitaremos crear la base de
 datos, nos conectamos al contenedor de mariadb con el comando:
 
@@ -89,8 +89,8 @@ datos, nos conectamos al contenedor de mariadb con el comando:
 Donde \texttt{65bdcb8d72f1} es el código del contenedor, que puede obtenerse con el
 comando \texttt{docker ps} cuando el proyecto está ejecutándose.
 
-\section{Creación de tablas}
-\label{sec:org01629b3}
+\subsection{Creación de tablas}
+\label{sec:org3f5c37d}
 En la línea de comandos, iniciamos una sesión en mysql con el comando:
 
 \texttt{mysql -u root -p}
@@ -207,4 +207,30 @@ CREATE TABLE notas
 
 Podremos comprobar que las tablas se crearon con el comando \texttt{show tables;}, que
 nos mostrará una lista de las tablas de nuestra base de datos.
+
+\section{Desarrollo}
+\label{sec:org1f04d03}
+El proyecto consta de dos secciones para resolver los dos problemas propuestos
+en el enunciado, la página de perfil de usuario, que mostrará la foto del
+usuario y la parte de notas, donde se mostrará el contenido de la tabla notas.
+
+\subsection{Inicio de sesión}
+\label{sec:orgc818c63}
+Para el inicio de sesión se ingresa en la dirección raíz (/) y si no se tiene
+una sesión iniciada, se mostrará el formulario de inicio de sesión. En caso de
+tener una sesión, el usuario podrá acceder automáticamente a su página de
+perfil, donde se mostrará su foto y la opción de cambiar el color de la página.
+
+Para esto, empezaremos por definir los modelos que representarán a las tablas de
+la base de datos.
+
+\subsection{Modelos}
+\label{sec:org2252483}
+Codeigniter nos permite abstraer los datos de una base de datos y las acciones
+que podemos realizar sobre ellas mediante modelos que definimos por cada tabla
+de la base de datos.
+
+\subsubsection{Usuario}
+\label{sec:orga3a4cb9}
+Definimos el modelo usuario
 \end{document}
