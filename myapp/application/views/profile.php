@@ -11,7 +11,6 @@
     <?php } ?>
 
     </ul>
-nippa
 
 </body>
 </html>

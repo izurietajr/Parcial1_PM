@@ -19,8 +19,8 @@ class User extends CI_Model {
         $this->load->database();
     }
 
-    function validate_password(){
-        $query = $this->db->get('usuario');
+    function validate_password($params){
+        $query = $this->db->get_where('usuario', array('dni' => $params['username'], 'password' => $params['password']));
         return $query;
     }
 

@@ -3,28 +3,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-	public function index()
+	public function index($err = FALSE)
 	{
-		$data["username"] = "Jesus";
-		$data["userid"] = "5";
-
+		$params['error'] = TRUE && $err;
 		$this->load->view('headers');
+		$this->load->view('login', $params);
 		// $this->load->view('navbar', $data);
-		$this->load->view('login');
 	}
 
 	public function validate()
 	{
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-
-		echo $username;
-		echo $password;
-
 		$this->load->model('user', 'user', TRUE);
-		$data['users'] = $this->user->validate_password();
 
+		$params['username'] = $this->input->post('username');
+		$params['password'] = $this->input->post('password');
+
+		$response = $this->user->validate_password($params);
+
+		if(empty($response->result())){
+			$this->index(TRUE);
+		}
+		else {
+			$this->profile($response);
+		}
+
+	}
+
+	private function profile($response){
+		// TODO show profile
+		$data['users'] = $response;
 		$this->load->view('headers');
 		$this->load->view('profile', $data);
+
 	}
 }

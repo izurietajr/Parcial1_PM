@@ -5,6 +5,10 @@
 
 	<div id="body">
 
+      <?php if($error){ ?>
+        <p style="color: red;">La contraseña es incorrecta.</p>
+      <?php } ?>
+
     <form method="post" action="/login/validate">
       <label>Nombre de usuario</label><br />
       <input type="text" name="username" value="" /><br />
