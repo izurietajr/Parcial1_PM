@@ -211,3 +211,45 @@ perfil, donde se mostrará su foto y la opción de cambiar el color de la págin
 
 Para esto, empezaremos por definir los modelos que representarán a las tablas de
 la base de datos.
+
+Se puede acceder a esta vista mediante la url =/login= para iniciar sesión, el
+sistema nos llevará a la url =/profile= si el inicio de sesión es exitoso
+
+*** Lista de notas
+La vista del listado de notas muestra la cantidad de aprobados en la base de
+datos =notas=, se contará en la consulta a cualquier entrada de la base de datos
+con una nota igual o mayor a 51.
+
+Se puede acceder a esta vista mediante la url =/scores=, donde se mostrará la
+cantidad de aprobados.
+
+Podremos verificar los datos de usuarios en la base de datos:
+
+[[./img/scoredb.png]]
+
+** Pruebas
+*** Perfil de usuario
+Ingresamos a la dirección =/login= e ingresamos con el CI =9860616= y la
+contraseña =12345678x=.
+
+[[./img/login.png]]
+
+Luego de esto, iniciaremos sesión y podremos acceder a la página de perfil.
+
+[[./img/perfil.png]]
+
+En la página de perfil veremos detalles del usuario y también un select que nos
+permitirá cambiar el color de la página, si seleccionamos otro color, veremos el
+cambio.
+
+[[./img/iden.png]]
+
+*** Notas
+Ingresamos a la dirección =/scores= podremos ver una lista de las materias aprobadas.
+
+[[./img/score.png]]
+
+Podremos comprobar que el conteo es correcto comparando con la consulta directa
+a la base de datos:
+
+[[./img/scoredb.png]]
