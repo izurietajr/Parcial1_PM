@@ -10,7 +10,8 @@
      <?php foreach($response as $score){ ?>
 
         <li>
-            <?= $score->notas ?>
+            <?= $score->residence ?>
+            <?= $score->aprobados ?>
         </li>
 
      <?php } ?>

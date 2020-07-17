@@ -1,4 +1,4 @@
-% Created 2020-07-16 Thu 20:03
+% Created 2020-07-16 Thu 21:02
 % Intended LaTeX compiler: pdflatex
 \documentclass[letter]{article}
 \usepackage[utf8]{inputenc}
@@ -53,7 +53,7 @@ problemas de versiones ni configuraciones extra para el funcionamiento del
 proyecto.
 
 \section{Configuración del proyecto}
-\label{sec:org0569705}
+\label{sec:org9ae6446}
 La estructura del proyecto estará definida por el archivo \texttt{docker-compose.yml},
 en el que indicaremos las imágenes de docker que se usarán para el proyecto, en
 este caso, usaremos contenedores de codeigniter y mariadb.
@@ -80,7 +80,7 @@ services:
 \end{verbatim}
 
 \section{Base de datos}
-\label{sec:orgb14ae8d}
+\label{sec:orgfbc4f55}
 Después de inicializar el proyecto con docker, necesitaremos crear la base de
 datos, nos conectamos al contenedor de mariadb con el comando:
 
@@ -90,7 +90,7 @@ Donde \texttt{65bdcb8d72f1} es el código del contenedor, que puede obtenerse co
 comando \texttt{docker ps} cuando el proyecto está ejecutándose.
 
 \subsection{Creación de tablas}
-\label{sec:orgd3f31bc}
+\label{sec:orgcbb18e7}
 En la línea de comandos, iniciamos una sesión en mysql con el comando:
 
 \texttt{mysql -u root -p}
@@ -209,25 +209,25 @@ Podremos comprobar que las tablas se crearon con el comando \texttt{show tables;
 nos mostrará una lista de las tablas de nuestra base de datos.
 
 \section{Desarrollo}
-\label{sec:org5a5ee58}
+\label{sec:org253a68e}
 El proyecto consta de dos secciones para resolver los dos problemas propuestos
 en el enunciado, la página de perfil de usuario, que mostrará la foto del
 usuario y la parte de notas, donde se mostrará el contenido de la tabla notas.
 
 \section{Modelos}
-\label{sec:org13103e1}
+\label{sec:org7c84e5c}
 Codeigniter nos permite abstraer los datos de una base de datos y las acciones
 que podemos realizar sobre ellas mediante modelos que definimos por cada tabla
 de la base de datos.
 
 \subsubsection{Usuario}
-\label{sec:org61c9fef}
+\label{sec:orgccdf1f8}
 Definimos el modelo usuario
 
 \section{Vistas}
-\label{sec:org9104397}
+\label{sec:org27f04d3}
 \subsection{Inicio de sesión}
-\label{sec:org2a13731}
+\label{sec:org7e017dc}
 Para el inicio de sesión se ingresa en la dirección raíz (/) y si no se tiene
 una sesión iniciada, se mostrará el formulario de inicio de sesión. En caso de
 tener una sesión, el usuario podrá acceder automáticamente a su página de
@@ -240,7 +240,7 @@ Se puede acceder a esta vista mediante la url \texttt{/login} para iniciar sesi�
 sistema nos llevará a la url \texttt{/profile} si el inicio de sesión es exitoso
 
 \subsection{Lista de notas}
-\label{sec:org46a9e3d}
+\label{sec:orgd5e01d5}
 La vista del listado de notas muestra la cantidad de aprobados en la base de
 datos \texttt{notas}, se contará en la consulta a cualquier entrada de la base de datos
 con una nota igual o mayor a 51.
@@ -248,16 +248,26 @@ con una nota igual o mayor a 51.
 Se puede acceder a esta vista mediante la url \texttt{/scores}, donde se mostrará la
 cantidad de aprobados.
 
-Podremos verificar los datos de usuarios en la base de datos:
-
-\begin{center}
-\includegraphics[width=.9\linewidth]{./img/scoredb.png}
-\end{center}
-
 \section{Pruebas}
-\label{sec:org28bb55f}
+\label{sec:org4f4cd85}
 \subsection{Perfil de usuario}
-\label{sec:org5b3e4d1}
+\label{sec:org4f02a9f}
+Las consultas a la base de datos se realizaron usando los modelos que
+proporciona codeigniter, ya que es una opción más segura ante ataques de
+inyección sql por ejemplo, la consulta para el inicio de sesión, usando modelos
+de codeigniter es:
+
+\begin{verbatim}
+$query = $this->db
+->get_where('usuario', array('dni' => $username, 'password' => $password));
+\end{verbatim}
+
+Que sería equivalente a la consulta:
+
+\begin{verbatim}
+select * from usuario where dni = $username and password = $password;
+\end{verbatim}
+
 Ingresamos a la dirección \texttt{/login} e ingresamos con el CI \texttt{9860616} y la
 contraseña \texttt{12345678x}.
 
@@ -276,11 +286,36 @@ permitirá cambiar el color de la página, si seleccionamos otro color, veremos 
 cambio.
 
 \begin{center}
+\includegraphics[width=.9\linewidth]{./img/azul.png}
+\end{center}
+
+Podremos verificar los datos de usuarios en la base de datos:
+
+\begin{center}
 \includegraphics[width=.9\linewidth]{./img/iden.png}
 \end{center}
 
 \subsection{Notas}
-\label{sec:orgf1bb77f}
+\label{sec:org2e98944}
+Para el conteo de notas, usando los modelos de codeigniter se usó la consulta:
+
+\begin{verbatim}
+$this->db->select('i.residence, count(i.residence) as aprobados');
+$this->db->from('notas n');
+$this->db->join('identificador i', 'i.user_pk = n.user_pk');
+$this->db->where('n.score >=', 51);
+$this->db->group_by('i.residence');
+\end{verbatim}
+
+La consulta equivalente que resuelve el segundo enunciado sería:
+
+\begin{verbatim}
+select i.residence, count(i.residence) as aprobados
+from notas n join identificador i on i.user_pk = n.user_pk
+where n.score >= 51
+group by i.residence;
+\end{verbatim}
+
 Ingresamos a la dirección \texttt{/scores} podremos ver una lista de las materias aprobadas.
 
 \begin{center}

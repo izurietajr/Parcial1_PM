@@ -223,12 +223,24 @@ con una nota igual o mayor a 51.
 Se puede acceder a esta vista mediante la url =/scores=, donde se mostrará la
 cantidad de aprobados.
 
-Podremos verificar los datos de usuarios en la base de datos:
-
-[[./img/scoredb.png]]
-
 ** Pruebas
 *** Perfil de usuario
+Las consultas a la base de datos se realizaron usando los modelos que
+proporciona codeigniter, ya que es una opción más segura ante ataques de
+inyección sql por ejemplo, la consulta para el inicio de sesión, usando modelos
+de codeigniter es:
+
+#+begin_src php
+$query = $this->db
+->get_where('usuario', array('dni' => $username, 'password' => $password));
+#+end_src
+
+Que sería equivalente a la consulta:
+
+#+begin_src sql
+select * from usuario where dni = $username and password = $password;
+#+end_src
+
 Ingresamos a la dirección =/login= e ingresamos con el CI =9860616= y la
 contraseña =12345678x=.
 
@@ -242,9 +254,32 @@ En la página de perfil veremos detalles del usuario y también un select que no
 permitirá cambiar el color de la página, si seleccionamos otro color, veremos el
 cambio.
 
+[[./img/azul.png]]
+
+Podremos verificar los datos de usuarios en la base de datos:
+
 [[./img/iden.png]]
 
 *** Notas
+Para el conteo de notas, usando los modelos de codeigniter se usó la consulta:
+
+#+begin_src php
+$this->db->select('i.residence, count(i.residence) as aprobados');
+$this->db->from('notas n');
+$this->db->join('identificador i', 'i.user_pk = n.user_pk');
+$this->db->where('n.score >=', 51);
+$this->db->group_by('i.residence');
+#+end_src
+
+La consulta equivalente que resuelve el segundo enunciado sería:
+
+#+begin_src sql
+select i.residence, count(i.residence) as aprobados
+from notas n join identificador i on i.user_pk = n.user_pk
+where n.score >= 51
+group by i.residence;
+#+end_src
+
 Ingresamos a la dirección =/scores= podremos ver una lista de las materias aprobadas.
 
 [[./img/score.png]]

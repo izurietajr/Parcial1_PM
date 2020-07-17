@@ -20,11 +20,17 @@ class Score extends CI_Model {
     }
 
     function approved(){
-        // select count(user_pk) from notes where score >= 51;
-        $this->db->select('count(user_pk) as notas');
-        $this->db->from('notas');
-        $this->db->where('score >=', 51);
-        //$this->db->group_by('', 51);
+
+        // $this->db->select('count(user_pk) as notas');
+        // $this->db->from('notas');
+        // $this->db->where('score >=', 51);
+
+        $this->db->select('i.residence, count(i.residence) as aprobados');
+        $this->db->from('notas n');
+        $this->db->join('identificador i', 'i.user_pk = n.user_pk');
+        $this->db->where('n.score >=', 51);
+        $this->db->group_by('i.residence');
+
         return $this->db->get()->result();
     }
 }
